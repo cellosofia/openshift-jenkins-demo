@@ -165,7 +165,11 @@ function deploy() {
 
   sleep 2
 
-  oc new-app jenkins-ephemeral -n cicd-$PRJ_SUFFIX
+  if $ARG_EPHEMERAL; then
+    oc new-app jenkins-ephemeral -n cicd-$PRJ_SUFFIX
+  else
+    oc new-app jenkins-persistent -n cicd-$PRJ_SUFFIX
+  fi
 
   sleep 2
 
